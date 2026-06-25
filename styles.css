@@ -29,7 +29,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    padding: 20px;
+    background-color: #77A8BB;
     font-family: Arial, sans-serif;
 }
 
@@ -38,17 +39,22 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    width: 100%;
+    max-width: 820px;
 }
 
 .score-panel {
     display: flex;
-    justify-content: space-between;  /* Space between score and button */
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
-    width: 800px;
-    padding: 10px;
-    background-color: #fff;
+    width: 100%;
+    max-width: 800px;
+    padding: 12px;
+    background-color: #FFC907;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    gap: 10px;
 }
 
 .timer {
@@ -58,10 +64,12 @@ body {
 }
 
 #game-container {
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
+    min-height: 420px;
     height: 600px;
     background-color: #e6f7ff;
-    border: 2px solid #333;
+    border: 5px solid #333;
     border-radius: 8px;
     position: relative;
     overflow: hidden;
@@ -119,10 +127,56 @@ body {
 }
 
 .game-tagline {
-    color: #666;
+    color: #0c0b0b;
     font-size: 18px;
     margin-bottom: 20px;
     text-align: center;
+}
+
+/* =============================================
+   FEEDBACK MESSAGES
+   ============================================= */
+.feedback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 22px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  pointer-events: none;       /* So it doesn't block clicks on drops */
+  z-index: 10;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.feedback-good {
+  background-color: rgba(79, 203, 83, 0.85);   /* Green — good catch */
+  color: #fff;
+}
+
+.feedback-bad {
+  background-color: rgba(245, 64, 44, 0.85);   /* Red — bad drop or miss */
+  color: #fff;
+}
+
+.feedback-end {
+  background-color: rgba(46, 157, 247, 0.92);  /* Blue — end of game */
+  color: #fff;
+  font-size: 26px;
+}
+
+.feedback-win {
+  background-color: rgba(255, 201, 7, 0.95);  /* Charity: water yellow */
+  color: #333;
+  font-size: 28px;
+  animation: winPulse 0.6s ease infinite alternate;
+}
+
+@keyframes winPulse {
+  from { transform: translate(-50%, -50%) scale(1); }
+  to   { transform: translate(-50%, -50%) scale(1.08); }
 }
 
 @keyframes dropFall {
@@ -134,12 +188,95 @@ body {
     }
 }
 
+/* =============================================
+   FOOTER
+   ============================================= */
+.game-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    border: 5px solid #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer-logo {
+    height: 80px;
+    width: auto;
+}
+
+.footer-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+}
+
 @media (max-width: 850px) {
-    .game-wrapper, .score-panel, #game-container {
-        width: 95vw;
+    body {
+        padding: 10px;
     }
-    
+
+    .game-wrapper {
+        gap: 16px;
+    }
+
+    .game-title {
+        font-size: 36px;
+    }
+
+    .game-tagline {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .score-panel {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 14px;
+    }
+
+    .score,
+    .timer,
+    #start-btn {
+        width: 100%;
+        text-align: center;
+    }
+
     #game-container {
-        height: 70vh;
+        height: 65vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .score-panel {
+        padding: 12px;
+    }
+
+    .game-title {
+        font-size: 30px;
+    }
+
+    .game-tagline {
+        font-size: 15px;
+    }
+
+    .score, .timer {
+        font-size: 20px;
+    }
+
+    #start-btn {
+        font-size: 15px;
+        padding: 10px 14px;
+    }
+
+    .water-drop {
+        width: 50px;
+        height: 50px;
+        padding: 12px;
+        margin: -12px;
     }
 }
